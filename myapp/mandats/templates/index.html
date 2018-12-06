@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+{% block title %}
+<title>Consultation mandat Etat</title>
+{% endblock %}
+{% block content %}
+  <h1>Accueil Mandats</h1>
+  <p>Bienvenue sur l'application web du Trésor pour vos mandats développé par<em>GUEYE Fatou Binetou</em>!</p>
+  <h2>Contenu dynamique</h2>
+  <p>L'&pplication a pour le moment:</p>
+  <ul>
+    <li><strong>Mandats:</strong> {{ num_mandats }}</li>
+    <li><strong>Virements:</strong> {{ num_virements }}</li>
+    <li><strong>Virements effectifs</strong> {{ num_virements_available }}</li>
+    <li><strong>Fournisseurs:</strong> {{ num_fournisseurs }}</li>
+  </ul>
+
+<p>Vous avez visité cette page {{ num_visits }}{% if num_visits == 1 %} fois{% else %} fois{% endif %}.</p>
+{% endblock %}

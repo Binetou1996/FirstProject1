@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Liste Virements</h1>
+  {% if virement_list %}
+  <ul>
+    {% for virement in virement_list %}
+      <li>
+        <a href="{{ virement.get_absolute_url }}">{{ virement.reference }}</a> ({{virement.montant}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Aucun virement n'est répertorié</p>
+  {% endif %}
+{% endblock %}

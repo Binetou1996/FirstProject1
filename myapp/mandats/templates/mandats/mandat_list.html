@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Liste Mandat</h1>
+  {% if mandat_list %}
+  <ul>
+    {% for mandat in mandat_list %}
+      <li>
+        <a href="{{ mandat.get_absolute_url }}">{{ mandat.ide_piece }}</a> ({{mandat.objet}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Pas de mandat disponible</p>
+  {% endif %}
+{% endblock %}

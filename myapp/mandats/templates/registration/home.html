@@ -1,0 +1,10 @@
+{% extends base.html %}
+
+{% block content %}
+  <h2>Accueil</h2>
+  <p>Bienvenue sur l'application de consultation de mandat {% if user.is_authenticated %}{{user.username}}{% else
+      %}visitor!</p>
+  <p>
+        <strong>...</strong>
+  </p>
+{% endblock %}

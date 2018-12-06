@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Virements</h1>
+
+    {% if virement_list %}
+    <ul>
+
+      {% for vir in virement_list %}
+      <li class="{% if vir.traite == 0 or vir.traite == 1 %}text-danger{% endif %}">
+        <a href="{% url 'virement-detail' vir.pk %}">{{vir.reference}}</a> ({{ vir.montant }})
+
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>Pas de virements disponible</p>
+    {% endif %}
+{% endblock %}

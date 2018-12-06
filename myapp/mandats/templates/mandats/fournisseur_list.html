@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Liste Fournisseur</h1>
+  {% if fournisseurs_list %}
+  <ul>
+    {% for fournisseurs in fournisseurs_list %}
+      <li>
+        <a href="{{ fournisseurs.get_absolute_url }}">{{ fournisseurs.ide_tiers }}</a> ({{fournisseurs.prenom}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Aucun fournisseur n'est répertorié</p>
+  {% endif %}
+{% endblock %}

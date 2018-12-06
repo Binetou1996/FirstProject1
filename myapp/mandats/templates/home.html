@@ -1,0 +1,6 @@
+{% extends 'base_inscription.html' %}
+
+{% block content %}
+  <h2>Merci pour votre confirmation de courrier électronique. Maintenant, vous pouvez vous connecter à votre compte.!</h2>
+  <p><a href="{% url 'login'%}?next={{request.path}}">Connexion</a></p>
+{% endblock %}

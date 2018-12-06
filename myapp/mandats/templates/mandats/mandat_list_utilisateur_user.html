@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Mandats</h1>
+
+    {% if mandat_list %}
+    <ul>
+
+      {% for mandatU in mandat_list %}
+      <li class="{% if mandatU.cod_statut == 'RF' or mandatU.cod_statut == 'RJ' %}text-danger{% endif %}">
+        <a href="{% url 'mandat-detail' mandatU.pk %}">{{mandatU.ide_piece}}</a> ({{ mandatU.date_emis }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>Pas de mandats disponible</p>
+    {% endif %}
+{% endblock %}

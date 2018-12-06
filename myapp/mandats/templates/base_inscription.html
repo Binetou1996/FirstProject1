@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Consultation Mandat Etat{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      <h1>Trésor</h1>
+        <a href="{% url 'signup' %}">s'inscrire</a>
+
+      <hr>
+    </header>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+  </body>
+</html>

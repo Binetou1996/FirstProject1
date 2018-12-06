@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Fournisseur: {{ fournisseurs.ide_tiers }}</h1>
+
+  <p><strong>Prenom:</strong> {{ fournisseurs.prenom}}</p>
+  <p><strong>Nom:</strong> {{ fournisseurs.nom}}</p>
+  <p><strong>Code catégorie social:</strong> {{ fournisseurs.code_cat_socio }}</p>
+  <p><strong>Code secteur d'activité:</strong> {{ fournisseurs.code_secteur }}</p>
+  <p><strong>Nom contributeurs:</strong> {{ fournisseurs.nom_contrib }}</p>
+  <p><strong>Code type tiers:</strong> {{ fournisseurs.code_typ_tiers}}</p>
+  <p><strong>Adresse:</strong> {{ fournisseurs.adresse}}</p>
+  <p><strong>Ville:</strong> {{ fournisseurs.ville}}</p>
+  <p><strong>Code postal:</strong> {{ fournisseurs.code_postal}}</p>
+  <p><strong>Boite postal:</strong> {{ fournisseurs.boite_postal}}</p>
+  <p><strong>Pays:</strong> {{ fournisseurs.pays}}</p>
+  <p><strong>Telephone:</strong> {{ fournisseurs.telephone}}</p>
+  <p><strong>Date création entreprise:</strong> {{ fournisseurs.date_creation}}</p>
+  <p><strong>Date fin de validité contrat:</strong> {{ fournisseurs.date_fin_validite}}</p>
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Services</h4>
+
+    {% for service in fournisseurs.mandat_set.all %}
+      <hr>
+      <p
+              class="{% if service.cod_statut == 'AC' or service.cod_statut == 'VI' or service.cod_statut == 'RC' %}text-success{% elif service.cod_statut == 'SA' or service.cod_statut == 'RF' or service.cod_statut == 'RJ' %}text-danger{% else %}text-warning{% endif %}">{{ service.get_cod_statut_display }}</p>
+      {% if service.cod_statut != 'RF' or service.cod_statut != 'VI' or service.cod_statut != 'RC' or service.cod_statut != 'SA' %}
+      <p><strong>Votre mandat suit la procédure normale</strong></p>
+      {% elif service.cod_statut != 'RJ' %}<p><strong>Votre mandat a été rejetté:</strong>
+      {{service.motif_rejet}}</p>
+      {% else %}<p><strong>Votre mandat a été refusé.</strong></p>
+      {% endif %}
+      <p><strong> Date émission:</strong> {{service.date_emis}}</p>
+      <p><strong> Date reception:</strong> {{service.date_reception}}</p>
+      <p><strong>Objet:</strong> {{service.objet}}</p>
+      <p class="text-muted"><strong>Numéro mandat:</strong> {{service.ide_piece}}</p>
+    {% endfor %}
+  </div>
+{% endblock %}

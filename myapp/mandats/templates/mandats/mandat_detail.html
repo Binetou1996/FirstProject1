@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Mandat: {{ mandat.ide_piece }}</h1>
+
+  <p><strong>Objet:</strong> {{ mandat.objet}}</p>
+  <p><strong>Fournisseur:</strong>
+      <a href="{% url 'fournisseur-detail' mandat.fournisseur.pk %}">{{ mandat.fournisseur }}</a></p> <!-- provider
+      detail
+      link not yet defined
+   -->
+  <p><strong>Statut:</strong> {{ mandat.cod_statut }}</p>
+  <p><strong>Montant:</strong> {{ mandat.montant }}</p>
+  <p><strong>Date emission:</strong> {{ mandat.date_emis }}</p>
+  <p><strong>Date reception:</strong> {{ mandat.date_reception}}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Paiements</h4>
+
+    {% for paiement in mandat.virement_set.all %}
+      <hr>
+      <p
+              class="{% if paiement.traite == 4 %}text-success{% elif paiement.traite == 0 or paiement.traite == 1 %}text-danger{% else %}text-warning{% endif %}">{{ paiement.get_traite_display }}</p>
+      {% if paiement.traite != 4 %}
+        <p><strong>Date du paiement effectif:</strong> {{paiement.date_paiement}}</p>
+      {% endif %}
+      <p><strong>Compte bancaire expéditeur:</strong> {{paiement.rib_donneur}}</p>
+      <p><strong>Compte bancaire fournisseur:</strong> {{paiement.rib_beneficiaire}}</p>
+      <p class="text-muted"><strong>Référence:</strong> {{paiement.reference}}</p>
+    {% endfor %}
+  </div>
+{% endblock %}

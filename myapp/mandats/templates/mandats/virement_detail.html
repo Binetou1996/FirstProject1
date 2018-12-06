@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Virement: {{ virement.reference }}</h1>
+
+  <p><strong>RIB donneur:</strong> {{ virement.rib_donneur}}</p>
+  <p><strong>RIB bénéficiaire:</strong> {{ virement.rib_beneficiaire}}</p>
+  <p><strong>Montant:</strong> {{ virement.montant}}</p>
+  <p><strong>Nom donneur:</strong> {{ virement.nom_donneur}}</p>
+  <p><strong>Adresse donneur:</strong> {{ virement.adresse_donneur}}</p>
+  <p><strong>Fournisseur:</strong>
+      <a href="{% url 'fournisseur-detail' virement.fournisseur.pk %}">{{ virement.fournisseur }}</a></p> <!--
+       fournisseur detail link not yet defined -->
+  <p><strong>Mandat:</strong>
+      <a href="{% url 'mandat-detail' virement.mandat.pk %}">{{ virement.mandat }}</a></p> <!-- mandat detail link
+      not yet defined -->
+  <p><strong>Date d'ordre:</strong> {{ virement.date_ordre}}</p>
+  <p><strong>Statut virement:</strong> {{ virement.traite}}</p>
+  <p><strong>Date paiement:</strong> {{ virement.date_paiement}}</p>
+{% endblock %}
