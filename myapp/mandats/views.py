@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.views import generic
 from .models import Mandat, CompteBancaire, Fournisseurs, Reglement, Virement
 from django.contrib.auth import login, authenticate
-from .forms import SignupForm, EditProfileForm
+from .forms import SignupForm, EditProfileForm, FournisseurForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -185,3 +185,18 @@ class ContactFoundation(ContactFormView):
 
     def get_success_url(self):
         return reverse('contact_form_sent')
+
+
+def invoice_view(request):
+    form = FournisseurForm(request.POST or None)
+
+    if form.is_valid():
+        doctype = form.cleaned_data['format']
+        filename = fill_template(
+            'mandats/fournisseur.odt', form.cleaned_data,
+            output_format=doctype)
+        visible_filename = 'fournisseur.{}'.format(doctype)
+
+        return FileResponse(filename, visible_filename)
+    else:
+        return render(request, 'mandats/form.html', {'form': form})

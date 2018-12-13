@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'templated_docs',
 ]
 
 MIDDLEWARE = [
@@ -133,4 +134,5 @@ EMAIL_HOST_USER = 'gouvtresor@gmail.com'
 EMAIL_HOST_PASSWORD = 'tresorgouv2018'
 EMAIL_PORT = 587
 
+TEMPLATED_DOCS_LIBREOFFICE_PATH = 'C:/Program Files/LibreOffice/program'
 

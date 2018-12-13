@@ -18,7 +18,6 @@ class UserProfile(models.Model):
     description = models.CharField(max_length=100, default='')
     city = models.CharField(max_length=100, default='')
     phone = models.IntegerField(default=0)
-
     london = UserProfileManager()
 
     def __str__(self):

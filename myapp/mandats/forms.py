@@ -3,14 +3,29 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 import logging
 from contact_form.forms import ContactForm
+from django.db import transaction
+
+from .models import Fournisseurs
 
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=200, required=True)
-
+    fournisseur = forms.ModelChoiceField(
+        queryset=Fournisseurs.objects.all(),
+        widget=forms.Select,
+        required=True
+    )
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'fournisseur', 'email', 'password1', 'password2')
+
+    @transaction.atomic
+    def save(self):
+        user = super().save(commit=False)
+        user.save()
+        fournisseur = Fournisseurs.objects.create(user=user)
+        # user.fournisseur.add(*self.cleaned_data.get('fournisseur'))
+        return user
 
 
 class EditProfileForm(UserChangeForm):
@@ -83,3 +98,16 @@ class BaseContactForm(ContactForm):
 
 class FoundationContactForm(BaseContactForm):
     recipient_list = ["gouvtresor@gmail.com"]
+
+
+class FournisseurForm(forms.Form):
+    FORMAT_CHOICES = (
+        ('pdf', 'PDF'),
+        ('docx', 'MS Word'),
+        ('html', 'HTML'),
+    )
+    number = forms.CharField(label='Fournisseur #')
+    fournisseur = forms.ModelChoiceField(queryset=Fournisseurs.objects.all())
+    subject = forms.CharField()
+    amount = forms.DecimalField()
+    format = forms.ChoiceField(choices=FORMAT_CHOICES)
