@@ -8,12 +8,13 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # url(r'^home/$', views.home, name='home'),
+    url(r'^$', views.login_redirect, name='login_redirect'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^profile/$', views.view_profile, name='view_profile'),
     url(r'^profile/(?P<pk>\d+)/$', views.view_profile, name='view_profile_with_pk'),
     url(r'^profile/edit/$', views.edit_profile, name='edit_profile'),
     url(r'^account_activation_sent/$', views.account_activation_sent, name='account_activation_sent'),
-    url(r'^activation_complete/$', views.activation_complete, name='activation_complete'),
+    url(r'^activation_complete/$', views.activation_complete, name='activation_complete  '),
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate, name='activate'),
 ]

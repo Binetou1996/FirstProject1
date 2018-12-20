@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap 4 Website Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  
+</head>
+<body>
+
+<div class="container">
+  <div id="home" style="margin-top:20px">
+    <p>
+      <span class="text-left">
+          <a class="navbar-brand" href="#"><a class="navbar-brand" href="#">
+              <img src="../img/logo.png" width="30" height="30" alt="">
+            </a></a>
+      </span>
+      <span class="float-right" style="margin-right: 20px;">
+          <i class="fa fa-user-circle" aria-hidden="true"></i>
+      </span>
+    </p>
+  </div>
+</div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+    <a class="navbar-brand" href="#">Mandat etat</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav" style="margin-left: 195px;">
+        <li class="nav-item ">
+          <a class="nav-link" href="#">Mandats</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#" style="border-left: 2px solid #333;">Virements</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="border-left: 2px solid #333;">Profil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="border-left: 2px solid #333;">Messages</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto">
+          <div class="dropdown" style="margin-left: 340px;" >
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Fournisseur
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+      </ul>
+    </div>
+  </div>
+  </nav>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+        <div class="card">
+            <h5 class="card-header">Liste des virements</h5>
+            
+          </div>
+    </div>
+  </div>
+</div>
+  <div class="container">
+    <div class="float-left">
+      <p>3 virements</p>
+    </div>
+    <div class="float-right">
+      <p>
+        <h5>Rechercher un virement</h5>
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+            </form>
+          </nav>
+      </p>
+    </div>
+  </div>
+  <div class="container" style="margin-top:140px">
+  <div class="row">
+    <div class="col">
+        <table class="table table-striped table-bordered" style="font-size: 12px;">
+            <thead>
+              <tr>
+                <th>N° mandat</th>
+                <th>Motif</th>
+                <th>Fournisseur</th>
+                <th>Compte fournisseur</th>
+                <th>Montant</th>
+                <th>Date d'ordre</th>
+                <th>Date de paiement</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>MD10-0000369</th>
+                <td>Versement de la subvention</td>
+                <td>Projet ASC empl</td>
+                <td>K0012</td>
+                <td>1.000.000</td>
+                <td>26/08/2018</td>
+                <td>15/09/2018</td>
+                <td>
+                  <button type="button" class="btn btn-outline-primary btn-sm">Consulter</button>
+                  <button type="button" class="btn btn-outline-primary btn-sm">Exporter</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>
+</div>
+
+
+
+<!--javascript-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

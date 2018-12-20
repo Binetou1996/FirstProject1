@@ -20,12 +20,14 @@ class SignupForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'fournisseur', 'email', 'password1', 'password2')
 
     @transaction.atomic
-    def save(self):
-        user = super().save(commit=False)
+    def save(self, commit=True):
+        fournisseur = self.cleaned_data.get('fournisseur')
+        user = super().save()
+        #fournisseur = Fournisseurs.objects.get(ide_tiers=fournisseur)
+        user.fournisseurs_set.add(fournisseur)
         user.save()
-        fournisseur = Fournisseurs.objects.create(user=user)
-        # user.fournisseur.add(*self.cleaned_data.get('fournisseur'))
         return user
+
 
 
 class EditProfileForm(UserChangeForm):
@@ -41,7 +43,7 @@ class EditProfileForm(UserChangeForm):
         )
 
 
-# logger = logging.getLogger(__name__)
+''# logger = logging.getLogger(__name__)
 
 
 class BaseContactForm(ContactForm):
@@ -99,7 +101,7 @@ class BaseContactForm(ContactForm):
 class FoundationContactForm(BaseContactForm):
     recipient_list = ["gouvtresor@gmail.com"]
 
-
+"""
 class FournisseurForm(forms.Form):
     FORMAT_CHOICES = (
         ('pdf', 'PDF'),
@@ -111,3 +113,4 @@ class FournisseurForm(forms.Form):
     subject = forms.CharField()
     amount = forms.DecimalField()
     format = forms.ChoiceField(choices=FORMAT_CHOICES)
+"""

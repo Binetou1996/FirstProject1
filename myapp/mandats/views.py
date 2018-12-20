@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.views import generic
 from .models import Mandat, CompteBancaire, Fournisseurs, Reglement, Virement
 from django.contrib.auth import login, authenticate
-from .forms import SignupForm, EditProfileForm, FournisseurForm
+from .forms import SignupForm, EditProfileForm, FoundationContactForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -16,8 +16,15 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from contact_form.views import ContactFormView
-from .forms import FoundationContactForm
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import tempfile
 
+
+def login_redirect(request):
+    return redirect('login')
 
 
 def index(request):
@@ -97,7 +104,9 @@ class LoanedVirementByUserListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Virement.objects.filter(utilisateur=self.request.user).filter(traite=4).order_by('date_ordre')
+        user = self.request.user
+        fournisseur = user.fournisseurs_set.first()
+        return Virement.objects.filter(fournisseur=fournisseur).filter(traite=4).order_by('date_ordre')
 
 
 """def home(request):
@@ -186,8 +195,8 @@ class ContactFoundation(ContactFormView):
     def get_success_url(self):
         return reverse('contact_form_sent')
 
-
-def invoice_view(request):
+"""
+def fournisseur_view(request):
     form = FournisseurForm(request.POST or None)
 
     if form.is_valid():
@@ -200,3 +209,26 @@ def invoice_view(request):
         return FileResponse(filename, visible_filename)
     else:
         return render(request, 'mandats/form.html', {'form': form})
+"""
+
+def generate_pdf(request):
+    """Generate pdf."""
+    # Model data
+    people = Person.objects.all().order_by('last_name')
+
+    # Rendered
+    html_string = render_to_string('bedjango/pdf.html', {'people': people})
+    html = HTML(string=html_string)
+    result = html.write_pdf()
+
+    # Creating http response
+    response = HttpResponse(content_type='application/pdf;')
+    response['Content-Disposition'] = 'inline; filename=list_people.pdf'
+    response['Content-Transfer-Encoding'] = 'binary'
+    with tempfile.NamedTemporaryFile(delete=True) as output:
+        output.write(result)
+        output.flush()
+        output = open(output.name, 'r')
+        response.write(output.read())
+
+    return response
